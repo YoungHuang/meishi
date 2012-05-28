@@ -1,8 +1,12 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-	username = "root"
-	password = "root"
+	dialect= org.hibernate.dialect.MySQLInnoDBDialect
+	username = "n/a"
+	password = "n/a"
+	url = "n/a"
+//	username = "root"
+//	password = "root"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -14,30 +18,30 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/meishi?autoreconnect=true&useUnicode=yes&characterEncoding=UTF-8"
+//            url = "jdbc:mysql://localhost:3306/meishi?autoreconnect=true&useUnicode=yes&characterEncoding=UTF-8"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE"
+//            url = "jdbc:h2:mem:testDb;MVCC=TRUE"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE"
-            pooled = true
-            properties {
-               maxActive = -1
-               minEvictableIdleTimeMillis=1800000
-               timeBetweenEvictionRunsMillis=1800000
-               numTestsPerEvictionRun=3
-               testOnBorrow=true
-               testWhileIdle=true
-               testOnReturn=true
-               validationQuery="SELECT 1"
-            }
+//            url = "jdbc:h2:prodDb;MVCC=TRUE"
+//            pooled = true
+//            properties {
+//               maxActive = -1
+//               minEvictableIdleTimeMillis=1800000
+//               timeBetweenEvictionRunsMillis=1800000
+//               numTestsPerEvictionRun=3
+//               testOnBorrow=true
+//               testWhileIdle=true
+//               testOnReturn=true
+//               validationQuery="SELECT 1"
+//            }
         }
     }
 }
