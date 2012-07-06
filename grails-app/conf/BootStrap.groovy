@@ -5,7 +5,7 @@ import meishi.Shop
 class BootStrap {
 
     def init = { servletContext ->
-//		return
+		return
 		
 		(1..20).each { i ->
 			def shop = new Shop(

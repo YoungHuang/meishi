@@ -15,4 +15,8 @@ class Dish {
 	
     static constraints = {
     }
+	
+	String toString() {
+		name
+	}
 }
