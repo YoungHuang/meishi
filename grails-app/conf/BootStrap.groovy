@@ -1,9 +1,11 @@
+import meishi.Dish
+import meishi.DishCategory
 import meishi.Shop
 
 class BootStrap {
 
     def init = { servletContext ->
-		return
+//		return
 		
 		(1..20).each { i ->
 			def shop = new Shop(
@@ -19,12 +21,46 @@ class BootStrap {
 				)
 			if (shop.validate()) {
 				shop.save(flush :true)
-		    }
-		    else {
+		    } else {
 				shop.errors.allErrors.each {
 					println it
 				}
 		    }
+		}
+		
+		Shop.list().each { shop ->
+			(1..2).each { i ->
+				def dishCategory = new DishCategory(
+						name : "系列套餐",
+						dishCount : 10,
+						shop : shop
+					)
+				if (dishCategory.validate()) {
+					dishCategory.save(flush :true)
+				} else {
+					dishCategory.errors.allErrors.each {
+						println it
+					}
+				}
+			}
+		}
+		
+		DishCategory.list().each { dishCategory ->
+			(1..10).each { i ->
+				def dish = new Dish(
+						name : "培根蛋三明治套餐",
+						price : 35.5,
+						description : "培根蛋三明治套餐 早餐（7点至11点供应）",
+						dishCategory : dishCategory
+					)
+				if (dish.validate()) {
+					dish.save(flush :true)
+				} else {
+					dish.errors.allErrors.each {
+						println it
+					}
+				}
+			}
 		}
     }
 	

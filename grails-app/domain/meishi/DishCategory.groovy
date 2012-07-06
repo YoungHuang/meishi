@@ -11,9 +11,12 @@ class DishCategory {
 	/** 菜单列表 **/
 	List<Dish> dishList
 	/** 菜品数量 **/
-	int count
+	Integer dishCount
 	
 	static belongsTo = [shop : Shop]
+	
+	static mapping = {
+	}
 	
     static constraints = {
     }
