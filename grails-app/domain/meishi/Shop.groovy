@@ -34,4 +34,8 @@ class Shop {
 	
     static constraints = {
     }
+	
+	String toString() {
+		name
+	}
 }

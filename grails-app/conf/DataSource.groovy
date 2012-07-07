@@ -5,8 +5,6 @@ dataSource {
 	username = "n/a"
 	password = "n/a"
 	url = "n/a"
-//	username = "root"
-//	password = "root"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -17,8 +15,10 @@ hibernate {
 environments {
     development {
         dataSource {
+			username = "root"
+			password = "root"
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-//            url = "jdbc:mysql://localhost:3306/meishi?autoreconnect=true&useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost:3306/meishi?autoreconnect=true&useUnicode=yes&characterEncoding=UTF-8"
         }
     }
     test {

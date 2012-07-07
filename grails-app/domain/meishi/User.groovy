@@ -13,4 +13,8 @@ class User {
 	
     static constraints = {
     }
+	
+	String toString() {
+		name
+	}
 }
