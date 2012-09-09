@@ -1,11 +1,14 @@
 import meishi.Dish
 import meishi.DishCategory
+import meishi.Order
+import meishi.OrderItem
 import meishi.Shop
+import meishi.User
 
 class BootStrap {
 
     def init = { servletContext ->
-		return
+//		return
 		
 		(1..20).each { i ->
 			def shop = new Shop(
@@ -57,6 +60,58 @@ class BootStrap {
 					dish.save(flush :true)
 				} else {
 					dish.errors.allErrors.each {
+						println it
+					}
+				}
+			}
+		}
+		
+		(1..10).each { i ->
+			def user = new User(
+				name : "张三$i",
+				phone : 12346798,
+				address : "太平南路1号大行宫新世纪广场4楼(近中山东路)"
+				)
+			if (user.validate()) {
+				user.save(flush :true)
+			} else {
+				user.errors.allErrors.each {
+					println it
+				}
+			}
+		}
+		
+		User.list().each { user ->
+			(1..5).each { i ->
+				def order = new Order(
+						shop : Shop.get(i),
+						user : user,
+						totalAmount : 35.5,
+						description : "早餐$i",
+						totalCount : 2,
+						people : 2
+					)
+				if (order.validate()) {
+					order.save(flush :true)
+				} else {
+					order.errors.allErrors.each {
+						println it
+					}
+				}
+			}
+		}
+		
+		Order.list().each { order ->
+			(1..5).each { i ->
+				def orderItem = new OrderItem(
+						dish : Dish.get(i),
+						count : 2,
+						order : order
+					)
+				if (orderItem.validate()) {
+					orderItem.save(flush :true)
+				} else {
+					orderItem.errors.allErrors.each {
 						println it
 					}
 				}
