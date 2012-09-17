@@ -24,6 +24,7 @@ class Shop {
 	String city
 	String district
 	String road
+  String area
 	/** 纬度 **/
 	Double latitude
 	/** 经度 **/
@@ -32,8 +33,8 @@ class Shop {
 	/** 菜单目录列表 **/
 	List<DishCategory> dishCategories
 	
-    static constraints = {
-    }
+  static constraints = {
+  }
 	
 	String toString() {
 		name
