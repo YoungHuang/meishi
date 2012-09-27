@@ -17,8 +17,8 @@ environments {
         dataSource {
 			username = "root"
 			password = "root"
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/meishi?autoreconnect=true&useUnicode=yes&characterEncoding=UTF-8"
+            dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:mysql://localhost:3306/test?autoreconnect=true&useUnicode=yes&characterEncoding=UTF-8"
         }
     }
     test {

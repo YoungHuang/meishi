@@ -4,7 +4,8 @@ import java.util.List;
 
 class HotArea {
   String name
-  City city
+
+  static belongsTo = [city : City]
   
   static constraints = {
   }
