@@ -10,3 +10,4 @@ target
 /web-app/WEB-INF/classes
 .classpath
 *.war
+target-eclipse
