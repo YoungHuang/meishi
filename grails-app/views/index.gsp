@@ -73,6 +73,7 @@
 				}
 			}
 		</style>
+		
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -112,5 +113,20 @@
 				</ul>
 			</div>
 		</div>
+		
+		<script>
+			$(document).ready(function(){
+			  $.ajax({
+			        url: "/meishi/order/show/1",
+			        dataType: "json",
+			        success: function(msg){
+			            alert(msg);
+			       },
+			       error: function(error) {
+						alert(msg);
+			       }
+			    });
+			});
+		</script>
 	</body>
 </html>
