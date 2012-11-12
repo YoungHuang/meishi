@@ -7,8 +7,8 @@ import java.util.List;
 * 订单
 */
 class Order {
-	final static STATUS_NEW = 0;
-	final static STATUS_CONFIRM = 1;
+	final static Integer STATUS_NEW = 0;
+	final static Integer STATUS_CONFIRM = 1;
 	
 	/** 商家 **/
 	Shop shop;

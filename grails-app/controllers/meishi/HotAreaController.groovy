@@ -1,5 +1,7 @@
 package meishi
 
+import grails.converters.JSON
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class HotAreaController {
@@ -8,6 +10,12 @@ class HotAreaController {
 
     def index() {
         redirect(action: "list", params: params)
+    }
+    
+    def search() {
+      params.max = Math.min(params.max ? params.int('max') : 10, 100)
+      def hotAreaList = HotArea.list(params)
+      render hotAreaList as JSON
     }
 
     def list() {

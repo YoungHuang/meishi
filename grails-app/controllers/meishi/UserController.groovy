@@ -1,5 +1,7 @@
 package meishi
 
+import grails.converters.JSON
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class UserController {
@@ -8,6 +10,18 @@ class UserController {
 
     def index() {
         redirect(action: "list", params: params)
+    }
+    
+    def login() {
+      def user = User.findByIdAndPassword(params.name, EncryptionUtils.encryptByMD5(params.password))
+      if (user) {
+        session.userId = user.id
+        return
+      } else {
+        def responseMessage = new ResponseMessage(errorCode : ResponseMessage.FAILED, errorMessage : "User not found!")
+        response.setStatus(400)
+        render responseMessage as JSON
+      }
     }
 
     def list() {
@@ -21,6 +35,7 @@ class UserController {
 
     def save() {
         def userInstance = new User(params)
+        userInstance.password = EncryptionUtils.encryptByMD5(params.password)
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return
