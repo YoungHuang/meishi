@@ -1,5 +1,7 @@
 package meishi
 
+import grails.converters.JSON
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class CityController {
@@ -9,6 +11,12 @@ class CityController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def hotCityList() {
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def hotCityList = City.list(params)
+		render hotCityList as JSON
+	}
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
