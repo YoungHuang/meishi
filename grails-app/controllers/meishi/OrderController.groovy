@@ -1,5 +1,7 @@
 package meishi
 
+import grails.converters.JSON
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class OrderController {
@@ -9,10 +11,19 @@ class OrderController {
     def index() {
         redirect(action: "list", params: params)
     }
+    
+    def items() {
+      def orderItemList = OrderItem.findAllByOrder(Order.get(params.id))
+      render orderItemList as JSON
+    }
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [orderInstanceList: Order.list(params), orderInstanceTotal: Order.count()]
+        def orderInstanceList = Order.list(params)
+        withFormat {
+          html { [orderInstanceList: orderInstanceList, orderInstanceTotal: Order.count()] }
+          json { render orderInstanceList as JSON }
+        }
     }
 
     def create() {

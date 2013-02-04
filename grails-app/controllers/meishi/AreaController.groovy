@@ -1,5 +1,7 @@
 package meishi
 
+import grails.converters.JSON
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class AreaController {
@@ -12,7 +14,11 @@ class AreaController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [areaInstanceList: Area.list(params), areaInstanceTotal: Area.count()]
+        def areaInstanceList = Area.list(params)
+        withFormat {
+          html { [areaInstanceList: areaInstanceList, areaInstanceTotal: Area.count()] }
+          json { render areaInstanceList as JSON }
+        }
     }
 
     def create() {

@@ -12,15 +12,13 @@ class HotAreaController {
         redirect(action: "list", params: params)
     }
     
-    def search() {
-      params.max = Math.min(params.max ? params.int('max') : 10, 100)
-      def hotAreaList = HotArea.list(params)
-      render hotAreaList as JSON
-    }
-
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [hotAreaInstanceList: HotArea.list(params), hotAreaInstanceTotal: HotArea.count()]
+        def hotAreaInstanceList = HotArea.list(params)
+        withFormat {
+          html { [hotAreaInstanceList: hotAreaInstanceList, hotAreaInstanceTotal: HotArea.count()] }
+          json { render hotAreaInstanceList as JSON }
+        }
     }
 
     def create() {

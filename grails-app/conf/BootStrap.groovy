@@ -99,7 +99,8 @@ class BootStrap {
       (1..5).each { i ->
         def orderItem = new OrderItem(
             dish : Dish.get(i),
-            count : 2,
+            orderItemCount : 2,
+            amount : 23.5,
             order : order
             )
         if (orderItem.validate()) {
